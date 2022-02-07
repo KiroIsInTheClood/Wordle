@@ -1,0 +1,12 @@
+C:\Users\oreoc\source\repos\Wordle\Wordle\bin\Release\Wordle.exe.config
+C:\Users\oreoc\source\repos\Wordle\Wordle\bin\Release\Wordle.exe
+C:\Users\oreoc\source\repos\Wordle\Wordle\bin\Release\Wordle.pdb
+C:\Users\oreoc\source\repos\Wordle\Wordle\bin\Release\Newtonsoft.Json.dll
+C:\Users\oreoc\source\repos\Wordle\Wordle\bin\Release\Newtonsoft.Json.xml
+C:\Users\oreoc\source\repos\Wordle\Wordle\obj\Release\Wordle.Wordle.resources
+C:\Users\oreoc\source\repos\Wordle\Wordle\obj\Release\Wordle.Properties.Resources.resources
+C:\Users\oreoc\source\repos\Wordle\Wordle\obj\Release\Wordle.csproj.GenerateResource.cache
+C:\Users\oreoc\source\repos\Wordle\Wordle\obj\Release\Wordle.csproj.CoreCompileInputs.cache
+C:\Users\oreoc\source\repos\Wordle\Wordle\obj\Release\Wordle.csproj.CopyComplete
+C:\Users\oreoc\source\repos\Wordle\Wordle\obj\Release\Wordle.exe
+C:\Users\oreoc\source\repos\Wordle\Wordle\obj\Release\Wordle.pdb
