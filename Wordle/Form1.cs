@@ -30,24 +30,15 @@ namespace Wordle
         /// </summary>
         private void createCases()
         {
-            int x = 12; int y = 15; int MARGE = 5; int TAILLE = 60;
             for (int k = 0; k < 30; k++)
             {
                 Button cases = new Button();
-                grpCases.Controls.Add(cases);
-                cases.Size = new Size(TAILLE, TAILLE);
-                if (x + TAILLE + MARGE > grpCases.Width) //Saut de ligne
-                {
-                    y += TAILLE + MARGE;
-                    x = 12;
-                }
-
-                cases.Location = new Point(x, y);
+                cases.Size = new Size(60, 60);
                 cases.Enabled = false;
                 cases.BackColor = Color.White;
                 cases.FlatStyle = FlatStyle.Flat;
                 cases.Font = new Font(cases.Font.FontFamily, 32);
-                x += TAILLE + MARGE;
+                flowLayoutPanel1.Controls.Add(cases);
             }
         }
 
@@ -56,63 +47,42 @@ namespace Wordle
         /// </summary>
         private void createLetters()
         {
-            int x = 12; int y = 15; int MARGE = 5; int TAILLE = 50;
-            for (int k = 0; k < 24; k++)
+            for (int k = 0; k < 26; k++)
             {
                 Button btn = new Button();
-                grpLettres.Controls.Add(btn);
-                btn.Size = new Size(TAILLE, TAILLE);
-
-                if (x + TAILLE + MARGE > grpLettres.Width)
+                flowLayoutPanel2.Controls.Add(btn);
+                btn.Size = new Size(50, 50);
+                btn.Text = ((char)('A' + k)).ToString();
+                btn.FlatStyle = FlatStyle.Flat;
+                btn.Font = new Font(btn.Font.FontFamily, 20);
+                btn.BackColor = Color.White;
+                btn.Click += new EventHandler(ClickLetter);
+                if(k == 23)
                 {
-                    y += TAILLE + MARGE;
-                    x = 12;
+                    Label lbl = new Label();
+                    flowLayoutPanel2.Controls.Add(lbl);
+                    lbl.Size = new Size(50, 50);
+
+                    Button btnEnter = new Button();
+                    flowLayoutPanel2.Controls.Add(btnEnter);
+                    btnEnter.Size = new Size(50, 50);
+                    btnEnter.Click += new EventHandler(SendWord);
+                    btnEnter.FlatStyle = FlatStyle.Flat;
+                    btnEnter.BackColor = Color.White;
+                    btnEnter.Text = ("Enter").ToString();
+                    ActiveControl = btnEnter;
                 }
-                btn.Location = new Point(x, y);
-                btn.Text = ((char)('A' + k)).ToString();
-                btn.FlatStyle = FlatStyle.Flat;
-                btn.Font = new Font(btn.Font.FontFamily, 20);
-                btn.BackColor = Color.White;
-                btn.Click += new EventHandler(ClickLetter);
-                x += TAILLE + MARGE;
+                if (k == 25)
+                {
+                    Button btnDelete = new Button();
+                    flowLayoutPanel2.Controls.Add(btnDelete);
+                    btnDelete.Size = new Size(50, 50);
+                    btnDelete.Click += new EventHandler(DeleteLetter);
+                    btnDelete.FlatStyle = FlatStyle.Flat;
+                    btnDelete.BackColor = Color.White;
+                    btnDelete.Text = ("Delete").ToString();
+                }
             }
-            if (x + TAILLE + MARGE > grpLettres.Width)
-            {
-                y += TAILLE + MARGE;
-                x = 12;
-            }
-            Button btnEnter = new Button();
-            grpLettres.Controls.Add(btnEnter);
-            btnEnter.Size = new Size(TAILLE, TAILLE);
-            btnEnter.Location = new Point(x+TAILLE+MARGE, y);
-            btnEnter.Click += new EventHandler(SendWord);
-            btnEnter.FlatStyle = FlatStyle.Flat;
-            btnEnter.BackColor = Color.White;
-            btnEnter.Text = ("Enter").ToString();
-            for (int k = 24; k < 26; k++)
-            {
-                Button btn = new Button();
-                grpLettres.Controls.Add(btn);
-                btn.Size = new Size(TAILLE, TAILLE);
-                btn.Location = new Point(x+(TAILLE + MARGE)*2, y);
-                btn.Text = ((char)('A' + k)).ToString();
-                btn.FlatStyle = FlatStyle.Flat;
-                btn.Font = new Font(btn.Font.FontFamily, 20);
-                btn.BackColor = Color.White;
-                btn.Click += new EventHandler(ClickLetter);
-                x += TAILLE + MARGE;
-            }
-
-            Button btnDelete = new Button();
-            grpLettres.Controls.Add(btnDelete);
-            btnDelete.Size = new Size(TAILLE, TAILLE);
-            btnDelete.Location = new Point(x + (TAILLE + MARGE) * 2, y);
-            btnDelete.Click += new EventHandler(DeleteLetter);
-            btnDelete.FlatStyle = FlatStyle.Flat;
-            btnDelete.BackColor = Color.White;
-            btnDelete.Text = ("Delete").ToString();
-
-            ActiveControl = btnEnter;
         }
 
         /// <summary>
@@ -128,11 +98,11 @@ namespace Wordle
             try
             {
                 Button btnClique = (Button)sender;
-                grpCases.Controls[caseN].Text = btnClique.Text;
+                flowLayoutPanel1.Controls[caseN].Text = btnClique.Text;
             }
             catch
             {
-                grpCases.Controls[caseN].Text = sender.ToString().ToUpper();
+                flowLayoutPanel1.Controls[caseN].Text = sender.ToString().ToUpper();
             }
             caseN++;
         }
@@ -147,7 +117,7 @@ namespace Wordle
             if (caseN == 0) return; //Si première case
             if (caseN > arrayPhase[phase] - 5) //Permet de ne pas supprimer les cases des lignes au dessus
             {
-                grpCases.Controls[caseN - 1].Text = "";
+                flowLayoutPanel1.Controls[caseN - 1].Text = "";
                 caseN--;
             }
         }
@@ -163,7 +133,7 @@ namespace Wordle
 
             for(int k = 0; k < 5; k++)
             {
-                lineWord += grpCases.Controls[caseN - 5 + k].Text;
+                lineWord += flowLayoutPanel1.Controls[caseN - 5 + k].Text;
             }
             VerifyWord(lineWord);
             lineWord = "";
@@ -182,7 +152,7 @@ namespace Wordle
                 MessageBox.Show("Please enter a real word", "No");
                 for(int k = 0; k < 6; k++)
                 {
-                    grpCases.Controls[caseN - k].Text = "";
+                    flowLayoutPanel1.Controls[caseN - k].Text = "";
                 }
                 caseN -= 5;
                 return;
@@ -190,7 +160,7 @@ namespace Wordle
             word = word.ToLower();
             for (int k = 0; k < word.Length; k++)
             {
-                var caseCible = grpCases.Controls[caseN - 5 + k];
+                var caseCible = flowLayoutPanel1.Controls[caseN - 5 + k];
                 wordTemp += caseCible.Text.ToLower();
                 int index = word.IndexOf(caseCible.Text.ToLower(), k, 1);
                 var countWord = word.Count(x => caseCible.Text.ToLower().Contains(x));
@@ -200,30 +170,33 @@ namespace Wordle
                 {
                     if (index != -1)
                     {
-                        grpCases.Controls[caseN - 5 + index].BackColor = Color.Green;
-                        grpLettres.Controls[(int)charWord[0] % 32 - 1].BackColor = Color.Green;
+                        flowLayoutPanel1.Controls[caseN - 5 + index].BackColor = Color.Green;
+                        flowLayoutPanel2.Controls[(int)charWord[0] % 32 - 1].BackColor = Color.Green;
                     }
                     else
                     {
-                        grpCases.Controls[caseN - 5 + k].BackColor = Color.Orange;
-                        grpLettres.Controls[(int)charWord[0] % 32 - 1].BackColor = Color.Orange;
+                        flowLayoutPanel1.Controls[caseN - 5 + k].BackColor = Color.Orange;
+                        if (!(flowLayoutPanel2.Controls[(int)charWord[0] % 32 - 1].BackColor == Color.Green))
+                        {
+                            flowLayoutPanel2.Controls[(int)charWord[0] % 32 - 1].BackColor = Color.Orange;
+                        }
                     }
 
                     if (countWordTest > countWord)
                     {
-                        grpCases.Controls[caseN - 5 + k].BackColor = Color.Gray;
+                        flowLayoutPanel1.Controls[caseN - 5 + k].BackColor = Color.Gray;
                         if(countWord == 0)
                         {
-                            grpLettres.Controls[(int)charWord[0] % 32 - 1].BackColor = Color.Gray;
+                            flowLayoutPanel2.Controls[(int)charWord[0] % 32 - 1].BackColor = Color.Gray;
                         }
                     }
                 }
                 if (countWordTest > countWord)
                 {
-                    grpCases.Controls[caseN - 5 + k].BackColor = Color.Gray;
+                    flowLayoutPanel1.Controls[caseN - 5 + k].BackColor = Color.Gray;
                     if (countWord == 0)
                     {
-                        grpLettres.Controls[(int)charWord[0] % 32 - 1].BackColor = Color.Gray;
+                        flowLayoutPanel2.Controls[(int)charWord[0] % 32 - 1].BackColor = Color.Gray;
                     }
                 }
             }
@@ -264,9 +237,9 @@ namespace Wordle
         /// </summary>
         private void resetGame()
         {
-            grpCases.Controls.Clear();
+            flowLayoutPanel1.Controls.Clear();
             createCases();
-            grpLettres.Controls.Clear();
+            flowLayoutPanel2.Controls.Clear();
             createLetters();
             wordRng();
             

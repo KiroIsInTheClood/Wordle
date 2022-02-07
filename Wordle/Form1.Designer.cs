@@ -29,27 +29,11 @@ namespace Wordle
         /// </summary>
         private void InitializeComponent()
         {
-            this.grpCases = new System.Windows.Forms.GroupBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.grpLettres = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
-            // 
-            // grpCases
-            // 
-            this.grpCases.Location = new System.Drawing.Point(25, 61);
-            this.grpCases.Name = "grpCases";
-            this.grpCases.Size = new System.Drawing.Size(344, 410);
-            this.grpCases.TabIndex = 0;
-            this.grpCases.TabStop = false;
-            // 
-            // grpLettres
-            // 
-            this.grpLettres.Location = new System.Drawing.Point(25, 486);
-            this.grpLettres.Name = "grpLettres";
-            this.grpLettres.Size = new System.Drawing.Size(344, 297);
-            this.grpLettres.TabIndex = 0;
-            this.grpLettres.TabStop = false;
             // 
             // label1
             // 
@@ -61,14 +45,28 @@ namespace Wordle
             this.label1.TabIndex = 1;
             this.label1.Text = "WORDLE";
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(35, 58);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(338, 403);
+            this.flowLayoutPanel1.TabIndex = 2;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(31, 479);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(338, 292);
+            this.flowLayoutPanel2.TabIndex = 0;
+            // 
             // Wordle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(386, 795);
+            this.ClientSize = new System.Drawing.Size(391, 795);
+            this.Controls.Add(this.flowLayoutPanel2);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.grpLettres);
-            this.Controls.Add(this.grpCases);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
             this.Name = "Wordle";
@@ -81,11 +79,10 @@ namespace Wordle
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox grpCases;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.GroupBox grpLettres;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
     }
 }
 
